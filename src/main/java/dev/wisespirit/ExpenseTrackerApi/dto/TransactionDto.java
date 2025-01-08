@@ -21,4 +21,11 @@ public record TransactionDto(Long id,
                              Long serviceId,
                              String note,
                              String fileUrl) {
+    public TransactionDto(@NotNull BigDecimal amount,LocalDate date,
+                          TransactionType type,TransactionStatus status,
+                          MoneyType moneyType,@NotNull Long clientId,@NotNull Long serviceId,String note,String fileUrl ){
+        this(null,amount,date,type,status,moneyType,clientId,serviceId,note,fileUrl);
+    }
+
+
 }
