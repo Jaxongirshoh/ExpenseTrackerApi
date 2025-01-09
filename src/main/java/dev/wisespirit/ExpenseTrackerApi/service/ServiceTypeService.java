@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ServiceClassForService {
+public class ServiceTypeService {
     private final ServiceRepository serviceRepository;
 
-    public ServiceClassForService(ServiceRepository serviceRepository) {
+    public ServiceTypeService(ServiceRepository serviceRepository) {
         this.serviceRepository = serviceRepository;
     }
 

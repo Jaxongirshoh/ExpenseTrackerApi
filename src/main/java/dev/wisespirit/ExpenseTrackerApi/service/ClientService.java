@@ -6,6 +6,8 @@ import dev.wisespirit.ExpenseTrackerApi.model.Client;
 import dev.wisespirit.ExpenseTrackerApi.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +37,18 @@ public class ClientService {
                 });
     }
 
+    public Optional<ClientDto> getClientById(Long id) {
+        return clientRepository.findById(id)
+                .map(ClientService::convertEntityToDto);
+    }
+
+    public Optional<List<ClientDto>> getALlClients() {
+        List<ClientDto> list = new ArrayList<>();
+        clientRepository.findAll()
+                .forEach(client -> list.add(convertEntityToDto(client)));
+        return Optional.of(list);
+    }
+
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
     }
@@ -49,5 +63,6 @@ public class ClientService {
                 client.getPhoneNumber(),
                 client.getServiceId());
     }
+
 
 }

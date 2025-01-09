@@ -48,6 +48,14 @@ public class TransActionService {
                 .toList());
     }
 
+    public Optional<TransactionDto> getTransaction(Long id) {
+        return transactionRepository.findById(id).map(TransActionService::convertEntityToDto);
+    }
+
+    public boolean existById(Long id) {
+        return transactionRepository.existsById(id);
+    }
+
     public static TransactionDto convertEntityToDto(Transaction transaction) {
         return new TransactionDto(transaction.getAmount(),
                 transaction.getDate(),
