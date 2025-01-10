@@ -34,7 +34,7 @@ public class TransActionService {
             transaction.setFileUrl(dto.fileUrl());
         }
         Transaction saved = transactionRepository.save(transaction);
-        //todo synch with notion
+        //todo synch Transaction with notion
         return Optional.of(convertEntityToDto(saved));
     }
 
