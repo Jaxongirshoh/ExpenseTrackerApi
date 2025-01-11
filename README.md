@@ -100,5 +100,4 @@ mvn -Pnative native:compile
 
 [Developer information to be added]
 
-## Support
-
+Telegram: @chala_softwareengineer or @iamwisespirit
