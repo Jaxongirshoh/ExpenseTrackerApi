@@ -8,11 +8,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Setter
+/*@Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor*/
 @Entity(name = "services")
 public class Service extends BaseModel {
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Service(String name) {
+        this.name = name;
+    }
 }

@@ -7,12 +7,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
+/*@Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor*/
 @Entity(name = "expense_categories")
 public class ExpenseCategory extends BaseModel{
     @NotNull
     private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ExpenseCategory(String name) {
+        this.name = name;
+    }
 }

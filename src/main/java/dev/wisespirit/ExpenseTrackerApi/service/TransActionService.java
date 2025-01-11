@@ -4,6 +4,7 @@ import dev.wisespirit.ExpenseTrackerApi.dto.TransactionCreatDto;
 import dev.wisespirit.ExpenseTrackerApi.dto.TransactionDto;
 import dev.wisespirit.ExpenseTrackerApi.model.Transaction;
 import dev.wisespirit.ExpenseTrackerApi.model.enums.TransactionType;
+import dev.wisespirit.ExpenseTrackerApi.notion.NotionSyncService;
 import dev.wisespirit.ExpenseTrackerApi.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Service
 public class TransActionService {
     private final TransactionRepository transactionRepository;
+    private final NotionSyncService notionSyncService;
 
-    public TransActionService(TransactionRepository transactionRepository) {
+    public TransActionService(TransactionRepository transactionRepository, NotionSyncService notionSyncService) {
         this.transactionRepository = transactionRepository;
+        this.notionSyncService = notionSyncService;
     }
 
     public Optional<TransactionDto> createTransaction(TransactionCreatDto dto) {
@@ -34,7 +37,8 @@ public class TransActionService {
             transaction.setFileUrl(dto.fileUrl());
         }
         Transaction saved = transactionRepository.save(transaction);
-        //todo synch Transaction with notion
+        //synch to notion
+        notionSyncService.syncTransactionToNotion(saved);
         return Optional.of(convertEntityToDto(saved));
     }
 

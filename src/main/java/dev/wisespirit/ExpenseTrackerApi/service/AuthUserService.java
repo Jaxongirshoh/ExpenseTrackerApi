@@ -2,9 +2,13 @@ package dev.wisespirit.ExpenseTrackerApi.service;
 
 import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserCreateDto;
 import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserDto;
+import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserLogin;
 import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserUpdateDto;
 import dev.wisespirit.ExpenseTrackerApi.model.AuthUser;
 import dev.wisespirit.ExpenseTrackerApi.repository.AuthUserRepository;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +18,19 @@ import java.util.Optional;
 public class AuthUserService {
     private final AuthUserRepository authUserRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
 
-    public AuthUserService(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder) {
+    public AuthUserService(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
+    }
+
+    public boolean verifyUser(AuthUserLogin user) {
+        Authentication authenticated = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(user.username(), user.password()));
+        return authenticated.isAuthenticated();
+
     }
 
     public Optional<AuthUserDto> createUser(AuthUserCreateDto dto) {

@@ -2,6 +2,7 @@ package dev.wisespirit.ExpenseTrackerApi.controller;
 
 import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserCreateDto;
 import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserDto;
+import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserLogin;
 import dev.wisespirit.ExpenseTrackerApi.dto.AuthUserUpdateDto;
 import dev.wisespirit.ExpenseTrackerApi.service.AuthUserService;
 import jakarta.validation.Valid;
@@ -23,6 +24,14 @@ public class UserController {
         return authUserService.createUser(dto)
                 .map(ResponseEntity::ok)
                 .orElse(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody AuthUserLogin userLogin){
+        if (authUserService.verifyUser(userLogin)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PutMapping("/{id}")
