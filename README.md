@@ -99,6 +99,6 @@ mvn -Pnative native:compile
 
 
 
-[Developer information to be added]
+[Telegram: @chala_softwareengineer or @iamwisespirit]
 
-Telegram: @chala_softwareengineer or @iamwisespirit
+
