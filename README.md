@@ -99,6 +99,7 @@ mvn -Pnative native:compile
 
 
 
-[Telegram: @chala_softwareengineer or @iamwisespirit]
-
-
+## Contact
+Project Maintainer [me](https://github.com/Jaxongirshoh) \
+[my-telegram](https://t.me/chala_softwareengineer)\
+Project Link: [https://github.com/Jaxongirshoh/warehouse](https://github.com/Jaxongirshoh/ExpenseTrackerApi)
