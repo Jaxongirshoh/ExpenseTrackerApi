@@ -25,7 +25,7 @@ public class NotionSyncService {
     }
 
     public void syncTransactionToNotion(Transaction transaction) {
-        String endpoint = notionConfigProperties.apiUrl() + "/pages";
+        String uri = notionConfigProperties.apiUrl() + "/pages";
 
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("parent", Map.of("database_id", notionConfigProperties.databaseId()));
@@ -95,7 +95,7 @@ public class NotionSyncService {
         try {
             ResponseEntity<Map> response = restClient
                     .post()
-                    .uri(endpoint)
+                    .uri(uri)
                     .headers(headers -> {
                                 headers.set("Authorization", notionConfigProperties.authToken());
                                 headers.set("Notion-Version", notionConfigProperties.apiVersion());
